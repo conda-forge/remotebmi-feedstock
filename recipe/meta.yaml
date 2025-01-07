@@ -1,3 +1,4 @@
+{% set python_min = '3.10' %}
 {% set name = "remotebmi" %}
 {% set version = "0.1.0" %}
 
@@ -14,15 +15,15 @@ build:
     - run-bmi-server = remotebmi.server:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python 3.10
+    - python {{ python_min }}
     - hatchling
     - pip
   run:
-    - python >=3.10
+    - python >={{ python_min }}
     - bmipy
     - numpy
     - httpx >=0.27.2
@@ -36,7 +37,7 @@ test:
   commands:
     - pip check
   requires:
-    - python 3.10
+    - python {{ python_min }}
     - pip
 
 about:
